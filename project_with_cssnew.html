@@ -1,0 +1,451 @@
+﻿<html>
+<head>
+	<meta charset="UTF-8">
+	<title>OEJTS Personality Test</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function() {	
+
+			$("#divQuestion").hide();
+			$("#buttons").hide();
+			$("#result").hide();
+
+			var error = "";
+			var num = 1;
+			var strclick;
+			var name;
+			var email;
+
+			var IEresult = "";
+			var SNresult = "";
+			var FTresult = "";
+			var JPresult = "";
+
+			var typeIE = "";
+			var typeSN = "";
+			var typeFT = "";
+			var typeJP = "";
+			var finalPType = "";
+
+			$("button").click(function(){
+				var whichBtn = $(this).val(); //get what user clicks
+
+				 if (whichBtn == "retest") {
+                     window.location.reload();
+                     sessionStorage.clear();
+				 }
+
+				if (whichBtn == "start") {
+
+					name = $("#name").val();
+					email = $("#email").val();
+					var validError = "";
+					var flag = true;
+
+					var alias = email.indexOf("@");
+					var lastAlias = email.lastIndexOf("@");
+					var dot = email.indexOf(".");
+					var lastDot = email.lastIndexOf(".");
+					var selectedValue;
+
+					$("#name").css("border-color", "inherit");
+					$("#email").css("border-color", "inherit");
+
+					if (email == "" && name == "") {
+						validError = "Name and Email cannot be left empty.";
+						$("#name").css("border-color", "red");
+						$("#email").css("border-color", "red");
+						flag = false;
+					} else {
+						if (name == "") {
+							validError = "Name cannot be left empty.";
+							$("#name").css("border-color", "red");
+							flag = false;
+						}
+					
+						if (email == "") {
+							validError = "Email cannot be left empty.";
+							$("#email").css("border-color", "red");
+							flag = false;
+						} else {
+							if (email.search(/[" "]/) != -1) {
+								validError = "Email must not have a space";
+								$("#email").css("border-color", "red");
+								flag = false;
+							}
+						
+							if (alias == -1 || dot == -1) {
+								validError = "Your email should contain “@” and “.”";
+								$("#email").css("border-color", "red");
+								flag=false;
+							} else {
+								if (alias!=lastAlias) {
+									validError = "Your email should only have one “@”";
+									$("#email").css("border-color", "red");
+									flag=false;
+								} else {      
+									if (alias == 0 || alias == email.length-1) {
+										validError = "“@” cannot be the first/last position";
+										$("#email").css("border-color", "red");
+										flag=false;
+									} else {
+										if (dot == 0 || dot == email.length-1 || lastDot == 0 || lastDot == email.length-1) {
+											validError = "“.” cannot be the first/last position";
+											$("#email").css("border-color", "red");
+											flag=false;
+										} else {
+											if (email.includes("@.") || email.includes(".@")) {
+												validError = "“@” and “.” cannot be together";
+												$("#email").css("border-color", "red");
+												flag=false;
+											}
+										}
+									}
+								}        
+							}
+						}	
+					}
+					if (flag) {
+						strclick = new Date();
+						timer();
+
+						$("#name").css("border-color", "inherit");
+						$("#email").css("border-color", "inherit");
+							
+						$("#mainPage").hide();
+						$("#divQuestion").fadeIn(1000);
+						$("#buttons").fadeIn(1000);
+						$("#previousPage").hide();
+						$("#btnResult").hide();
+					} else {
+						alert(validError);
+					}
+				}
+
+				if (whichBtn == "next") {
+					if ($("input:checked").length == 0) {
+						error = "Please select a value";
+					} else {
+						error = "";
+						selectedValue = $("input[type='radio']:checked").val();
+						sessionStorage.setItem("Q"+num, selectedValue);
+						num++;
+						$("#previousPage").show();
+					}
+				}
+
+				if (whichBtn == "previous") {
+					$("#btnResult").hide();
+					$("#nextPage").show();
+
+					num--;
+					if (num == 1) {
+						$("#previousPage").hide();
+					}
+					error = "";
+                }
+
+               
+
+				if (whichBtn != "result") {
+					if (error == "") {
+						$("#pError").text(error);
+						$.ajax({
+							url: "Questions.xml",
+							dataType: "xml",	
+							error: function (e) {
+								alert("An error occurred while processing XML file");
+							}, 
+							success: function (xml) {
+								$(xml).find("Questions").each(function(){
+
+									var question = parseInt($(this).attr("code"));
+									var left = $(this).find("left").text();
+									var right = $(this).find("right").text();
+
+									if (question == num) {
+										$("#Qnum").html("<h3 class='no'>(" + $(this).attr("code") + "/32)</h3>");
+										$("#leftpart").html(left);
+										$("#radioSelection").html("");
+										$("#radioSelection").append("<input type='radio' name='"+num+"' value='1' id='Uno'/><label for='Uno'><svg class='check' viewbox='0 0 40 40'><defs><linearGradient id='gradient' x1='0' y1='0' x2='0' y2='100%'><stop offset='0%' stop-color='lightblue'></stop><stop offset='100%' stop-color='grey'></stop></linearGradient></defs><circle id='border' r='18px' cx='20px' cy='20px'></circle><circle id='dot' r='8px' cx='20px' cy='20px'></circle></svg>1</label>");
+										$("#radioSelection").append("<input type='radio' name='"+num+"' value='2' id='Dos'/><label for='Dos'><svg class='check' viewbox='0 0 40 40'><defs><linearGradient id='gradient' x1='0' y1='0' x2='0' y2='100%'><stop offset='0%' stop-color='#ff8a00'></stop><stop offset='100%' stop-color='#da1b60'></stop></linearGradient></defs><circle id='border' r='18px' cx='20px' cy='20px'></circle><circle id='dot' r='8px' cx='20px' cy='20px'></circle></svg>2</label>");
+										$("#radioSelection").append("<input type = 'radio' name='"+num+"' value='3' id='Tres'/><label for='Tres'><svg class='check' viewbox='0 0 40 40'><defs><linearGradient id='gradient' x1='0' y1='0' x2='0' y2='100%'><stop offset='0%' stop-color='#ff8a00'></stop><stop offset='100%' stop-color='#da1b60'></stop></linearGradient></defs><circle id='border' r='18px' cx='20px' cy='20px'></circle><circle id='dot' r='8px' cx='20px' cy='20px'></circle></svg>3</label>");
+										$("#radioSelection").append("<input type = 'radio' name='"+num+"' value='4' id='a'/><label for='a'><svg class='check' viewbox='0 0 40 40'><defs><linearGradient id='gradient' x1='0' y1='0' x2='0' y2='100%'><stop offset='0%' stop-color='#ff8a00'></stop><stop offset='100%' stop-color='#da1b60'></stop></linearGradient></defs><circle id='border' r='18px' cx='20px' cy='20px'></circle><circle id='dot' r='8px' cx='20px' cy='20px'></circle></svg>4</label>");
+										$("#radioSelection").append("<input type = 'radio' name='"+num+"' value='5' id='b'/><label for='b'><svg class='check' viewbox='0 0 40 40'><defs><linearGradient id='gradient' x1='0' y1='0' x2='0' y2='100%'><stop offset='0%' stop-color='#ff8a00'></stop><stop offset='100%' stop-color='#da1b60'></stop></linearGradient></defs><circle id='border' r='18px' cx='20px' cy='20px'></circle><circle id='dot' r='8px' cx='20px' cy='20px'></circle></svg>5</label>");
+										$("#rightpart").html(right);
+
+										if(question == 3) {
+											$("#btnResult").show();
+											$("#nextPage").hide();
+										}
+									}
+								});
+								selectedValue = sessionStorage.getItem("Q"+num);
+								$("input[type='radio'][value='"+selectedValue+"']").prop("checked", true);
+							}
+						});
+					} else {
+						$("#pError").text(error);
+					}	
+				} else {
+					if ($("input:checked").length == 0) {
+						$("#pError").text("Please select a value");
+					} else {
+						var endclick = new Date();
+
+						selectedValue = $("input[type='radio']:checked").val();
+						sessionStorage.setItem("Q"+num, selectedValue);
+						
+						$("#buttons").hide();
+						$("#divQuestion").hide();
+						$("#result").fadeIn(300);
+															
+						var totaltimemin = Math.floor((endclick.getTime() - strclick.getTime()) / 1000 / 60);
+						var totaltimesec = Math.floor(((endclick.getTime() - strclick.getTime()) / 1000) % 60);
+						$("#last").html("<h2 id='testend'><u>Test Ended</u></h2>"+"<h3 id='h3TimeUsed'>Total time used: "+(Math.abs(Math.round(totaltimemin)))+" minute(s) and "+(Math.abs(Math.round(totaltimesec)))+ " second(s).</h3><br><br>");
+												
+						var IE = Math.abs(30 - parseInt(sessionStorage.getItem("Q3")) - parseInt(sessionStorage.getItem("Q7")) - parseInt(sessionStorage.getItem("Q11")) + parseInt(sessionStorage.getItem("Q15")) - parseInt(sessionStorage.getItem("Q19")) + parseInt(sessionStorage.getItem("Q23")) + parseInt(sessionStorage.getItem("Q27")) - parseInt(sessionStorage.getItem("Q31")));
+						var SN = Math.abs(12 + parseInt(sessionStorage.getItem("Q4")) + parseInt(sessionStorage.getItem("Q8")) + parseInt(sessionStorage.getItem("Q12")) + parseInt(sessionStorage.getItem("Q16")) + parseInt(sessionStorage.getItem("Q20")) - parseInt(sessionStorage.getItem("Q24")) - parseInt(sessionStorage.getItem("Q28")) + parseInt(sessionStorage.getItem("Q32")));										
+						var FT = Math.abs(30 - parseInt(sessionStorage.getItem("Q2")) + parseInt(sessionStorage.getItem("Q6")) + parseInt(sessionStorage.getItem("Q10")) - parseInt(sessionStorage.getItem("Q14")) - parseInt(sessionStorage.getItem("Q18")) + parseInt(sessionStorage.getItem("Q22"))	- parseInt(sessionStorage.getItem("Q26")) - parseInt(sessionStorage.getItem("Q30")));
+						var JP = Math.abs(18 + parseInt(sessionStorage.getItem("Q1")) + parseInt(sessionStorage.getItem("Q5")) - parseInt(sessionStorage.getItem("Q9")) + parseInt(sessionStorage.getItem("Q13")) - parseInt(sessionStorage.getItem("Q17")) + parseInt(sessionStorage.getItem("Q21")) - parseInt(sessionStorage.getItem("Q25")) + parseInt(sessionStorage.getItem("Q29")));			
+
+						console.log(IE);
+						console.log(SN);
+						console.log(FT);
+						console.log(JP);
+						
+						$.ajax({
+							url: "Result.xml",
+							dataType: "xml",	
+							error: function (e) {
+								alert("An error occurred while processing XML file");
+							}, 
+							success: function (xml) {
+								$(xml).find("IE").each(function(){
+									if (IE > 24){
+										IEresult = $(this).find("ieh").text() + "<br />";
+										typeIE = "E";
+									} else {
+										IEresult = $(this).find("iel").text() + "<br />";
+										typeIE = "I";
+									}
+								});
+
+								$(xml).find("SN").each(function(){
+									if (SN > 24){
+										SNresult = $(this).find("snh").text() + "<br />";
+										typeSN = "N";
+									}else {
+										SNresult = $(this).find("snl").text() + "<br />";
+										typeSN = "S";
+									}
+								});
+
+								$(xml).find("FT").each(function(){
+									if (FT > 24){
+										FTresult = $(this).find("fth").text() + "<br />";
+										typeFT = "T";
+									} else {
+										FTresult = $(this).find("ftl").text() + "<br />";
+										typeFT = "F";
+									}		
+								});
+
+								$(xml).find("JP").each(function(){
+									if (JP > 24){
+										JPresult = $(this).find("jph").text() + "<br />";
+										typeJP = "P";
+									} else {
+										JPresult = $(this).find("jpl").text() + "<br />";
+										typeJP = "J";
+									}		
+								});
+
+								$("#getResult").append(IEresult+""+SNresult+""+FTresult+""+JPresult+"<br />");
+                                $("#getResult").append("Your personality type is " + typeIE + "" + typeSN + "" + typeFT + "" + typeJP + ".");
+                                finalPType = typeIE + "" + typeSN + "" + typeFT + "" + typeJP;
+
+								$.ajax({
+									url: "PersonalityType.xml",
+									dataType: "xml",	
+									error: function (e) {
+										alert("An error occurred while processing XML file");
+									}, 
+                                    success: function (xml) {
+                                        $(xml).find("type").each(function () {
+                                            var p = $(this).attr("p");
+                                            var short = $(this).find("short").text();
+                                            var long = $(this).find("long").text();
+
+                                            if (p == finalPType) {
+                                                $("#pTypeShort").append("<u>"+short + "</u><br />");
+                                                $("#pTypeLong").append(long);
+                                            }
+                                        });
+									}
+								}); 
+								
+								//email
+								var to = email; // the user's email, check in spam folder, school email is not recommended
+								var subject = "Your personality type is "+finalPType; // the subject title you wish to
+								var message = "<h2>Hi, "+name+". Thank you for taking the test.</h2>"+
+												"<h3>"+IEresult+""+SNresult+""+FTresult+""+JPresult+"<br /></h3>"+
+												"Your personality type is " +finalPType+ "."; // your message content, you could insert html here
+								
+								$.ajax({        
+									url: "http://uuhau.com/sendmail.php", // never change this
+									data: { 
+										'to' : to,
+										'subject' : subject,
+										'message' : message
+									},
+									dataType: "jsonp", // never change this, by default ajax not allowing ajax call to different domain but jsonp.
+									error: function (e) {  
+										console.log(e);
+									},
+									success: function (data){
+										console.log(data.success);  // you will get a 1 if mail is sent successfully
+									}
+								});
+								$("#resultEmail").append("To: " + email + "<br><br>");
+								$("#resultEmail").append("Subject: "+subject);
+							}
+						});	
+									
+						 
+					}
+				}
+			});
+		});
+
+		function timer() {
+			var seconds = 0;
+
+			timer = setInterval(function(){
+				seconds++;
+
+				if ((seconds % 60) >= 10) {
+					$("#timerSec").text(seconds % 60);
+				} else if ((seconds % 60) == 0) {                       
+					$("#timerSec").text("00");
+				} else {
+					$("#timerSec").text("0" + seconds % 60);
+				}
+
+				if (parseInt(seconds / 60) >= 10) {
+					$("#timerMin").text(parseInt(seconds / 60));
+				} else if (parseInt(seconds / 60) == 0) {
+					$("#timerMin").text("00");
+				} else {
+					$("#timerMin").text("0" + parseInt(seconds / 60));
+				}
+			}, 1000);
+		}
+
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+	<div id="mainPage" class="divBox">		
+		
+		<h1 id = "title"><i>Open Extended Jungian Type Scales 1.2</i></h1>
+
+		<br>
+
+		<h2 id="h2Intro">Introduction</h2>
+		<p id="pIntro">This is a personality test that will give you a result equivalent to the Myers-Briggs Types Indicator, 
+			although this test is not the MBTI and has no affiliation with it.</p>
+
+		<br>
+
+		<div id="formField">
+			<div class="field">
+				<b>Name:</b>
+				<br>
+				<input type="text" id="name" placeholder="John">
+			</div>
+
+			<br>
+
+			<div class="field">
+				<b>Email:</b>
+				<br>
+				<input type="text" id="email" placeholder="youremail@email.com">
+			</div>
+		</div>
+
+		<br><br>
+
+		<div id="btnStart">
+			<button id="start" class="radio" value="start"><span>Start </span></button>
+		</div>
+		
+	</div>
+
+	<div id="divQuestion" class="divBox" id="divBoxID">
+
+		<div id="Qnum"></div>
+		<div id="timer" class="questionFlex">
+			<h2 id="timerMin">00</h2><h2>:</h2><h2 id="timerSec">00</h2>
+		</div>
+		
+		
+
+		<div class="questionFlex" id="questionPart">
+			<div id="leftpart"></div>
+			<div id="radioSelection"></div>			
+			<div id="rightpart"></div>
+		</div>
+
+		<p id="pError"></p>
+
+	</div>
+	
+	<div class="buttonsContainer">
+		<div id="buttons">								
+			<button id="previousPage" value="previous"><span> Previous Page</span></button>
+			<button id="btnResult" value="result"><span>Result </span></button>
+			<button id="nextPage" value="next"><span>Next Page </span></button>
+		</div>
+	</div>
+
+	<div id="result" class="divBox">		
+		<div id="last"></div>
+		<div id="getResult"></div>
+
+		<div id="pTypeContainer">
+			<div id="pType">
+		        <div id="pTypeShort"></div>
+		        <div id="pTypeLong"></div>
+		    </div>
+		</div>
+
+		<div id="emailContainer">
+			<div id="resultEmail"></div>
+		</div>
+
+		<div id="retest">
+			<button id="btnRetest" value="retest">Retest</button>
+		</div>
+
+	</div>
+
+	<audio id="hoveraudio">
+	  	<source src="hoveraudio/hover.ogg"></source>
+	  	<source src="hoveraudio/hover.mp3"></source>
+	</audio>
+
+	<script>
+		var hoveraudio = $("#hoveraudio")[0];
+		
+		$("#radioSelection").click(function() {
+			hoveraudio.play();
+		});				
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Result>
+	<IE>
+		<ieh>You are extroverted. (E)</ieh>
+		<iel>You are introverted. (I)</iel>
+	</IE>
+
+	<SN>
+		<snh>You are intuitive. (N)</snh>
+		<snl>You are sensing. (S)</snl>
+	</SN>
+
+	<FT>
+		<fth>You are thinking. (T)</fth>
+		<ftl>You are feeling. (F)</ftl>
+	</FT>
+
+	<JP>
+		<jph>You are perceiving. (P)</jph>
+		<jpl>You are judging. (J)</jpl>
+	</JP>
+</Result>

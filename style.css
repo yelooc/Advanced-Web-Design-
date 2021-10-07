@@ -1,0 +1,749 @@
+.divBox {
+	width: 60%;
+	margin: 0 auto;	
+	padding: 60px;
+	background-color: #36393f;
+	margin-top: 50px;
+	word-spacing: 3px;
+	opacity: 1;
+	color: #ccc;
+}
+
+#result {
+	margin-top: 0;
+}
+
+button {
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+	background-color:#79bbff;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:8px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+	width: 40%;
+}
+
+button:hover {
+	background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+	background-color:#378de5;
+	color: black;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+.buttonsContainer{
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+#buttons{
+	display: flex;
+	justify-content: center;
+	justify-content: space-around;
+	width: 45%;
+}
+
+h1 {
+	margin-top: 0;
+    text-align: center;
+    font-family: courier;
+	text-shadow: 2px 2px black;
+	color: white;
+}
+
+body {
+	background: lightblue url("images/aesthetic.gif") no-repeat fixed center;
+	background-size: 100%;
+	background-color: #cccccc;
+	background-size: cover;
+}
+
+#h2Intro{
+	text-decoration: underline;
+	font-size: 40px;
+	font-family: "Agency FB";
+	margin-bottom: -10px;
+	text-align: center;
+}
+
+#btnStart{
+	display: flex;
+	justify-content: center;
+}
+
+#start {
+	width: 100%;
+}
+
+input[type=text] {
+  	width: 100%;
+  	padding: 12px 20px;
+	  /* margin: 8px 0; */
+	margin-top: 8px;
+ 	display: inline-block;
+  	background-color: #1a1a1a;
+  	border: 2px solid #1a1a1a;
+  	border-radius: 4px;
+  	box-sizing: border-box;
+	/* margin-left: 10px; */
+	color: white;
+	font-size: 15px;
+}
+
+input[type=text]:hover {
+  	background-color: #333333;
+}
+
+.questionFlex {
+	width:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#leftpart {
+	width: 30%;
+	text-align: center;
+	font-weight: bold;
+	font-family: Consolas;
+	font-size: 20px;
+	border-right-style: solid;
+   	border-left-style: solid;
+   	border-bottom-style: dotted;
+  	border-top-style: dotted;
+	/* display: inline-block; */
+	/* float: left; */
+}
+
+#rightpart {
+	width: 30%;
+	text-align: center;
+	font-weight: bold;
+	font-family: Consolas;
+	font-size: 20px;
+	border-right-style: solid;
+    border-left-style: solid;
+    border-bottom-style: dotted;
+    border-top-style: dotted; 
+	/* display: inline-block; */
+	/* float: right; */
+}
+
+#radioSelection {
+	width: 40%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-left: 5px;
+	margin-right: 5px;
+
+	/* display: inline-block; */
+}
+
+#timer {
+	width: 100%;
+	margin-top: -20px;
+	margin-bottom: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.no{
+	font-family: "Arial";
+	font-size: 21px;
+	margin-top: 0px;
+}
+
+#qNum{
+	font-family: "Consolas";
+	font-weight: bold;
+	padding-bottom: -30px;
+	font-size: 20px;
+}
+
+#pIntro {
+	font-size: 22px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: justify;
+	/* font-style: italic; */
+}
+
+#title {
+	font-size: 40px;
+}
+
+b {
+	font-size: 19px;
+	font-family: sans-serif;
+}
+
+.field {
+	width: 100%;
+}
+
+#formField {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#testend{
+	text-align: center;
+	font-style: italic;
+	font-family: Agency FB;
+	font-size: 40px;
+	margin-top: 0;
+}
+
+/* button effect */
+/* next page effect */
+#nextPage {
+	transition: all 0.5s;
+}
+
+#nextPage span {
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	font-family: "Arial";
+}
+
+#nextPage span:after {
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
+}
+
+#nextPage:hover span {
+	padding-right: 25px;
+}
+  
+#nextPage:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+/* previous page effect */
+#previousPage {
+	transition: all 0.5s;
+}
+
+#previousPage span {
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	font-family: "Arial";
+}
+
+#previousPage span:after {
+	content: '\00ab';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: -20px;
+	transition: 0.5s;
+}
+
+#previousPage:hover span {
+	padding-left: 25px;
+}
+  
+#previousPage:hover span:after {
+	opacity: 1;
+	left: 0;
+}
+
+/* start button effect */
+#start {
+	transition: all 0.5s;
+}
+
+#start span {
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	font-family: "Arial";
+}
+
+#start span:after {
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
+}
+
+#start:hover span {
+	padding-right: 25px;
+}
+  
+#start:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+/* result button effect */
+#btnResult {
+	transition: all 0.5s;
+}
+
+#btnResult span {
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	font-family: "Arial";
+}
+
+#btnResult span:after {
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
+}
+
+#btnResult:hover span {
+	padding-right: 25px;
+}
+  
+#btnResult:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+#qs{
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	font-family: Consolas;
+}
+
+#qs div{
+	width: 25%;
+	text-align: center;
+	line-height: 50px;
+}
+
+#qs span{
+	font-size: 20px;
+}
+
+#getResult{
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 20px;
+}
+
+#retest{
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+#pTypeContainer{
+	display: flex;
+	justify-content: center;
+}
+
+#pType {
+  position: relative;
+  width: 80%;
+  background: white;
+  color: black;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+  box-shadow: 20px 20px rgba(0,0,0,.15);
+  transition: all .4s ease;
+  margin-top: 40px;
+  padding: 30px;
+}
+
+#pType:hover {
+  border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+  box-shadow: 10px 10px rgba(0,0,0,.25);
+}
+
+#pTypeShort{
+	text-align: center;	
+	font-size: 22px;
+	margin-bottom: 20px;
+	font-family: "Consolas";
+}
+
+#pTypeLong{
+	font-family: "Consolas";
+}
+/* #qNumValue{
+	font-size: 20px;
+} */
+
+#h3TimeUsed {
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.qSession{
+	font-size: 30px;
+}
+
+#pError {
+	color: #E93434;
+	font-style: italic;
+	font-size: 20px;
+	margin-top: 25px;
+}
+
+label {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap:wrap;
+  cursor: pointer;
+}
+
+#emailContainer{
+	margin-top: 30px;	
+	display: flex;
+	justify-content: center;
+}
+
+#resultEmail {
+	width: 60%;
+	--x: 50%;
+	--y: 50%;	
+	position: relative;
+	appearance: none;
+	padding: 1em 2em;
+	color: white;
+	font-family: Arial;
+	font-size: large;
+	cursor: pointer;
+	outline: none;
+	border-radius: 100px;
+	border: 2px solid transparent;
+	background: linear-gradient(rgb(226, 105, 105), rgb(236, 76, 55)) padding-box, radial-gradient(farthest-corner at var(--x) var(--y), red, #845EC2) border-box;
+}
+
+label:hover{
+transform: scale(1.5);
+}
+
+.check {
+  margin-right: 3px;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.check #border {
+  fill: none;
+  stroke: #7a7a8c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.check #dot {
+  fill: url(#gradient);
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+input {
+  display: none;
+}
+input:checked + label {
+  background: linear-gradient(180deg, lightblue, grey);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+input:checked + label svg #border {
+  stroke: url(#gradient);
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+  animation: checked 500ms ease forwards;
+}
+input:checked + label svg #dot {
+  transform: scale(1);
+  transition: transform 500ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
+}
+
+@keyframes checked {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+
+ 	#title {
+		font-size: 30px;
+		margin-bottom: -10px;
+  	}
+
+  	#h2Intro{  	
+  		font-size: 30px;
+  		margin-bottom: 5px;
+  		font-weight: bold;
+ 	}
+
+  	#pIntro{
+  		font-size: 15px;
+  		font-weight: bold;
+  	}
+
+  	#formField b{
+  		font-size: 11px;
+  	}
+
+  	#formField input[type=text] {
+	  	width: 100%;
+	  	padding: 5px 5px;
+		  /* margin: 8px 0; */
+		margin-top: 3px;
+	 	display: inline-block;
+	  	background-color: #495055;
+	  	border: 1px solid #ccc;
+	  	border-radius: 4px;
+	  	box-sizing: border-box;
+		/* margin-left: 10px; */
+		color: white;
+		font-size: 12px;
+	}
+
+	#divQuestion div{
+		padding-top: -10px;
+	}
+
+	h2{
+		font-size: 15px;
+	}
+
+	h3{
+		font-size: 16px;
+	}
+
+	#leftpart{
+		font-size: 14px;
+	}
+
+	#rightpart{
+		font-size: 14px;
+	}
+
+	.no{
+		font-size: 15px;
+	}
+
+	#divQuestion input[type=radio]{
+		box-sizing: 10px;
+	}
+
+	#qs div{
+		line-height: 20px;
+	}
+
+	#qs span{
+		font-size: 12px;
+		
+	}
+
+	#last {
+		height: 150px;
+	}
+
+	.divBox {
+		width: 60%;
+		margin: 0 auto;
+		padding: 20px;
+		background-color: #36393f;
+		margin-top: 30px;
+		word-spacing: 3px;
+		opacity: 1;
+		color: #ccc;
+	}
+
+	#divQuestion div{
+		font-size: 13px;
+	}
+
+	.buttonsContainer{
+		display: flex;
+	}
+
+	#buttons{
+		display: flex;
+		width: 80%;
+	}
+
+	button{
+		width: 40%;
+		font-size: 10px;
+	}
+
+	.Qnum{
+		font-size: 18px;
+	}
+
+	#getResult{
+		font-size: 15px;
+	}
+
+	#pError{
+		font-size: 17px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+ 	#title {
+		font-size: 20px;
+		margin-bottom: -10px;
+  	}
+
+  	#h2Intro{  	
+  		font-size: 17px;
+  		margin-bottom: 5px;
+ 	}
+
+  	#pIntro{
+  		font-size: 12px;
+  	}
+
+  	#formField b{
+  		font-size: 10px;
+  	}
+
+  	#formField input[type=text] {
+	  	width: 100%;
+	  	padding: 5px 5px;
+		  /* margin: 8px 0; */
+		margin-top: 3px;
+	 	display: inline-block;
+	  	background-color: #495055;
+	  	border: 1px solid #ccc;
+	  	border-radius: 4px;
+	  	box-sizing: border-box;
+		/* margin-left: 10px; */
+		color: white;
+		font-size: 10px;
+	}
+
+	button{
+		font-size: 10px;
+		padding: 10px 10px;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+
+	#divQuestion div{
+		padding-top: -10px;
+	}
+
+	h2{
+		font-size: 15px;
+	}
+
+	h3{
+		font-size: 15px;
+	}
+
+	#leftpart{
+		font-size: 10px;
+	}
+
+	#rightpart{
+		font-size: 10px;
+	}
+
+	.no{
+		font-size: 15px;
+	}
+
+	#divQuestion input[type=radio]{
+		box-sizing: 10px;
+	}
+
+	#qs div{
+		line-height: 20px;
+	}
+
+	#qs span{
+		font-size: 9px;
+		
+	}
+
+	#last {
+		height: 170px;
+	}
+
+	.divBox {
+		width: 80%;
+		margin: 0 auto;
+		padding: 15px;
+		background-color: #36393f;
+		margin-top: 20px;
+		word-spacing: 3px;
+		opacity: 1;
+		color: #ccc;
+	}
+
+	#divQuestion div{
+		font-size: 10px;
+		padding-top: -10px;
+	}
+
+	.buttonsContainer{
+		display: flex;
+	}
+
+	#buttons{
+		display: flex;	
+		flex-direction: column-reverse;	
+		width: 80%;		
+	}
+
+	#getResult{
+		font-size: 10px;
+	}
+
+	#radioSelection {
+		width:100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		margin-left: 10px;
+		margin-right: 10px;
+		/* display: inline-block; */
+	}
+
+	label {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.check {
+		margin-right: 3px;
+		width: 1rem;
+		height: 1rem;
+	}
+
+	#pError{
+		font-size: 12px;
+	}
+}
